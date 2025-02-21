@@ -1,0 +1,10 @@
+﻿CatalogTypeName,CatalogBrandName,Description,Name,Price,PictureFileName,availablestock,onreorder
+T-Shirt,.NET,".NET Bot Black Hoodie, and more",.NET Bot Black Hoodie,19.5,1.jpg,100,false
+Mug,.NET,.NET Black & White Mug,.NET Black & White Mug,8.50,2.jpg,89,true
+T-Shirt,Other,Prism White T-Shirt,Prism White T-Shirt,12,3.jpg,56,false
+T-Shirt,.NET,.NET Foundation T-Shirt,.NET Foundation T-Shirt,12,4.jpg,120,false
+Sheet,Other,Roslyn Red Sheet,Roslyn Red Sheet,12.5,5.jpg,55,false
+T-Shirt,Other,Prism White T-Shirt,Prism White T-Shirt,12,6.jpg,8,false
+T-Shirt,Other,Kudu Purple Hoodie,Kudu Purple Hoodie,12,7.jpg,34,false
+Mug,Other,Cup<T> White Mug,Cup<T> White Mug12,8.jpg,76,false
+
