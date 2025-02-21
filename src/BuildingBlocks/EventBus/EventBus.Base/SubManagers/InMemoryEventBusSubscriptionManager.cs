@@ -48,10 +48,10 @@ namespace EventBus.Base.SubManagers
             _handlers[eventName].Add(SubscriptionInfo.Typed(handlerType));
         }
 
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
+        //public void Clear()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void RemoveSubscription<T, TH>()
                 where T : IntegrationEvent
