@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventBus.UnitTest.Events.EventHandlers
+﻿namespace EventBus.UnitTest.Events.EventHandlers
 {
-    public class OrderCreatedIntegrationEventHandler : IIntegrationEventHandler 
+    public class OrderCreatedIntegrationEventHandler /*: IIntegrationEventHandler */
     {
     }
 }

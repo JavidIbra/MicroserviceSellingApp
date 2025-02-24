@@ -58,7 +58,7 @@ namespace EventBus.RabbitMQ
             }
         }
 
-        public override void Publish(IntegrationEvent @event)
+        public override async void Publish(IntegrationEvent @event)
         {
             if (!persistentConnection.IsConnected)
             {
@@ -67,7 +67,7 @@ namespace EventBus.RabbitMQ
 
             var policy = Policy.Handle<BrokerUnreachableException>()
                 .Or<SocketException>()
-                .WaitAndRetryAsync(EventBusConfig.ConnectionRetryCount, retryAttempt: => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
+                .WaitAndRetryAsync(EventBusConfig.ConnectionRetryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
                 {
                     // Loglama
                 });
@@ -75,30 +75,30 @@ namespace EventBus.RabbitMQ
             var eventName = @event.GetType().Name;
             eventName = ProcessEventName(eventName);
 
-            consumerChannel.ExchangeDeclareAsync(exchange: EventBusConfig.DefaultTopicName, type: "direct"); // ensure exchange exist when publishing
+            await consumerChannel.ExchangeDeclareAsync(exchange: EventBusConfig.DefaultTopicName, type: "direct"); // ensure exchange exist when publishing
 
             var message = JsonConvert.SerializeObject(@event);
             var body = Encoding.UTF8.GetBytes(message);
 
-            policy.Execute(() =>
+            _ = policy.ExecuteAsync(async () =>
             {
-                var properties = consumerChannel.CreateBasicProperties();
-                properties.deliveryMood = 2; //  persistent
+                //var properties = consumerChannel;
+                //properties.deliveryMood = 2; //  persistent
 
-                consumerChannel.QueueDeclareAsync(queue: GetSubName(eventName), // ensure queue exists while consuming
-                                                    durable: true,
-                                                        exclusive: false,
-                                                             autoDelete: false,
-                                                                    arguments: null
-                       );
+                await consumerChannel.QueueDeclareAsync(queue: GetSubName(eventName), // ensure queue exists while consuming
+                                                     durable: true,
+                                                         exclusive: false,
+                                                              autoDelete: false,
+                                                                     arguments: null
+                        );
 
-                consumerChannel.BasicPublishAsync(
-                 exchange: EventBusConfig.DefaultTopicName,
-                 routingKey: eventName,
-                 mandatory: true,
-                 basicProperties: properties,
-                 body: body
-                 );
+                await consumerChannel.BasicPublishAsync(
+                  exchange: EventBusConfig.DefaultTopicName,
+                  routingKey: eventName,
+                  mandatory: true,
+                  //basicProperties: properties,
+                  body: body
+                  );
 
             });
         }
