@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/catalog/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+
+      "UpstreamPathTemplate": "/catalog/{everything}",
+      "UpstreamHttpmehtod": [ "Get", "Put", "Post", "Delete" ],
+      "UpstreamScheme": "http"
+
+    }
+  ]
+}

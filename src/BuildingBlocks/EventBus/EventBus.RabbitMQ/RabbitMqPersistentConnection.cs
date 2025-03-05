@@ -10,7 +10,7 @@ namespace EventBus.RabbitMQ
         private readonly IConnectionFactory connectionFactory;
         private readonly int retryCount;
         private IConnection connection;
-        private object lock_object = new object();
+        private readonly object lock_object = new();
         private bool _disposed;
 
         public RabbitMqPersistentConnection(IConnectionFactory connectionFactory, int retryCount = 5)

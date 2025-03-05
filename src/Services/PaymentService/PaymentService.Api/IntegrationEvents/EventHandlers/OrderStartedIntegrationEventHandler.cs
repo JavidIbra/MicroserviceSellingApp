@@ -25,8 +25,8 @@ namespace PaymentService.Api.IntegrationEvents.EventHandlers
             bool paymentSuccessFlag = _configuration.GetValue<bool>(keyword);
 
             IntegrationEvent paymentEvent = paymentSuccessFlag
-                ?new OrderPaymentSuccessIntegrationEvent(@event.OrderId)
-                :new OrderPaymentFailedIntegrationEvent(@event.OrderId , "This is a new fake error message");
+                ? new OrderPaymentSuccessIntegrationEvent(@event.OrderId)
+                : new OrderPaymentFailedIntegrationEvent(@event.OrderId, "This is a new fake error message");
 
             logger.LogInformation($"OrderCreatedIntegrationEventHandler in  PaymentService is fired with PaymentSuccess : {paymentSuccessFlag}, orderId:{@event.OrderId} ");
 
