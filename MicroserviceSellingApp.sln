@@ -82,6 +82,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rabbitmq", "rabbitmq", "{AE1EAC29-A32C-4E8A-8C79-3E16AC37362C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "redis", "redis", "{B051BDFC-D5D3-43B2-AD8B-DF972F7B42BA}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlserver", "sqlserver", "{CF9AAFD4-6968-41E6-86C6-0A60667B03E7}"
 EndProject

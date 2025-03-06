@@ -1,3 +1,4 @@
+using CatalogService.Api.Extensions;
 using CatalogService.Api.Infrastructure.Setup;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,9 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.Configure<CatalogSettings>(builder.Configuration.GetSection("CatalogSettings"));
-//builder.Services.ConfigureDbContextt(builder.Configuration);
+//builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureConsul(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -38,5 +41,7 @@ app.UseAuthorization();
 //app.UseContentRoot(Directory.GetCurrentDirectory());
 
 app.MapControllers();
+
+app.RegisterWithConsul(lifetime: app.Lifetime);
 
 app.Run();

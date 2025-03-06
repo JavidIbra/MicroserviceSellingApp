@@ -1,19 +1,67 @@
 {
   "Routes": [
     {
+      "UseServiceDiscovery": true,
+      "ServiceName": "CatalogService",
+
       "DownstreamPathTemplate": "/api/catalog/{everything}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5004
-        }
-      ],
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 5004
+      //  }
+      //],
 
       "UpstreamPathTemplate": "/catalog/{everything}",
       "UpstreamHttpmehtod": [ "Get", "Put", "Post", "Delete" ],
       "UpstreamScheme": "http"
 
+    },
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "IdentityService",
+
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 5005
+      //  }
+      //],
+
+      "UpstreamPathTemplate": "/auth",
+      "UpstreamHttpmehtod": [ "Post" ],
+      "UpstreamScheme": "http"
+
+    },
+    {
+      "UseServiceDiscovery": true,
+      "ServiceName": "BasketService",
+
+      "DownstreamPathTemplate": "/api/Basket/{everything}",
+      "DownstreamScheme": "http",
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 5005
+      //  }
+      //],
+
+      "UpstreamPathTemplate": "/basket/{everything}",
+      "UpstreamHttpmehtod": [ "Post", "Get", "Put", "Delete" ],
+      "UpstreamScheme": "http"
+
     }
-  ]
+  ],
+
+  "GlobalConfiguration": {
+    "Baseurl": "http://localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
 }
