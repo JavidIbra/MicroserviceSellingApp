@@ -30,7 +30,7 @@ namespace BasketService.Api.Extensions
             var address = addresses?.Addresses.FirstOrDefault();
 
             // Register Services with consul
-            var uri = new Uri(address);
+            var uri = new Uri(address);   // buna baxaciq sabah
             var registration = new AgentServiceRegistration()
             {
                 ID = $"BasketService",
